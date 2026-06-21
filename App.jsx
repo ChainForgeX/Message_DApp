@@ -1,8 +1,8 @@
-import Staking from "./Staking";
+import Message from "./Message";
 
 function App(){
   return(
-    <Staking />
+    <Message />
   );
 }
 
