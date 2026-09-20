@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {ethers} from "ethers";
-import {MessageABI} from "./abi/MessageABI";
+import {MessageABI} from "./MessageABI";
 
 function Message(){
     const[message, setMessage] = useState("");
     const[storedMessage, setStoredMessage] = useState("");
 
-    const contractAddress = "CONTRACT ADDRESS";
+    const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
     const saveMessage = async() =>{
         const provider = new ethers.BrowserProvider(window.ethereum);
