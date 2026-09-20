@@ -8,6 +8,8 @@
 ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
 ![Hardhat](https://img.shields.io/badge/Hardhat-FFF100?style=flat&logo=ethereum&logoColor=black)
 ![Ethers.js](https://img.shields.io/badge/Ethers.js-2535a0?style=flat)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=flat&logo=render&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 </div>
@@ -22,6 +24,8 @@
 - [Architecture](#-architecture)
 - [Smart Contract Functions](#-smart-contract-functions)
 - [Getting Started](#-getting-started)
+- [Docker Deployment](#-docker-deployment)
+- [Cloud Deployment](#-cloud-deployment)
 - [Learning Outcomes](#-learning-outcomes)
 - [Future Improvements](#-future-improvements)
 - [Author](#-author)
@@ -34,6 +38,8 @@
 
 Users can submit messages and retrieve them directly from the smart contract — no centralized database required.
 
+The frontend is built using React and Vite, containerized using Docker, and deployed as a cloud application using Render.
+
 ---
 
 ## ✨ Features
@@ -45,6 +51,8 @@ Users can submit messages and retrieve them directly from the smart contract —
 | 🔗 Smart Contract Integration | Frontend interacts directly with the contract |
 | 👛 Wallet Connectivity | Connect via MetaMask or any injected wallet |
 | 🔒 Immutable Data Storage | Messages cannot be altered once written |
+| 🐳 Dockerized Frontend | Frontend is packaged and deployed using Docker |
+| ☁️ Cloud Deployment | Application is deployed on Render |
 
 ---
 
@@ -52,12 +60,16 @@ Users can submit messages and retrieve them directly from the smart contract —
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | React, JavaScript, Ethers.js |
+| **Frontend** | React, Vite, JavaScript, Ethers.js |
 | **Blockchain** | Solidity, Hardhat, Ethereum |
+| **Containerization** | Docker |
+| **Cloud Deployment** | Render |
 
 ---
 
 ## 🏗 Architecture
+
+### Application Architecture
 
 ```mermaid
 flowchart TD
@@ -67,6 +79,14 @@ flowchart TD
     D --> E[⛓️ Blockchain]
 ```
 
+### Cloud Deployment Architecture
+
+<div align="center">
+
+![Cloud Deployment Architecture](./cloud-deployment-architecture.png)
+
+</div>
+
 ---
 
 ## 📜 Smart Contract Functions
@@ -74,17 +94,15 @@ flowchart TD
 | Function | Type | Description |
 |---|---|---|
 | `setMessage()` | Write | Stores a new message on-chain |
-| `getMessage()` | Read | Returns the currently stored message |
+| `message()` | Read | Returns the currently stored message |
 
 ```solidity
 function setMessage(string memory _message) public {
     message = _message;
 }
-
-function getMessage() public view returns (string memory) {
-    return message;
-}
 ```
+
+The `message` variable is declared as `public`, so Solidity automatically provides a getter function named `message()`.
 
 ---
 
@@ -94,13 +112,14 @@ function getMessage() public view returns (string memory) {
 - Node.js (v16+)
 - MetaMask browser extension
 - Hardhat
+- Docker
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/Jeevan9898/message-dapp.git
-cd message-dapp
+git clone https://github.com/ChainForgeX/Message_DApp.git
+cd Message_DApp
 
 # Install dependencies
 npm install
@@ -110,15 +129,65 @@ npx hardhat compile
 
 # Start a local blockchain
 npx hardhat node
-
-# Deploy the contract
-npx hardhat run scripts/deploy.js --network localhost
-
-# Start the frontend
-cd frontend
-npm install
-npm start
 ```
+
+### Deploy the Contract Locally
+
+```bash
+npx hardhat run scripts/deploy.js --network localhost
+```
+
+### Start the Frontend
+
+```bash
+npm run dev
+```
+
+The Vite development server will start locally.
+
+---
+
+## 🐳 Docker Deployment
+
+Build the Docker image:
+
+```bash
+docker build -t message-dapp .
+```
+
+Run the Docker container:
+
+```bash
+docker run --rm -p 5173:4173 message-dapp
+```
+
+The application can then be accessed at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## ☁️ Cloud Deployment
+
+The Dockerized frontend is deployed on Render.
+
+### Deployment Flow
+
+```
+GitHub Repository
+       ↓
+Docker Build
+       ↓
+Render Cloud
+       ↓
+Public Web Application
+```
+
+### Live Application
+
+🌐 https://message-dapp.onrender.com
 
 ---
 
@@ -128,6 +197,8 @@ npm start
 - Smart Contract State Variables
 - Blockchain Transactions
 - React + Solidity Interaction
+- Docker Containerization
+- Cloud Deployment
 
 ---
 
@@ -137,6 +208,7 @@ npm start
 - [ ] Message History
 - [ ] User Profiles
 - [ ] IPFS Integration
+- [ ] Public Blockchain Deployment
 
 ---
 
