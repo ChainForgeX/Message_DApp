@@ -3,7 +3,10 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  preview: {
+  server: {
     allowedHosts: ["message-dapp.onrender.com"],
+  },
+  preview: {
+    allowedHosts: true,
   },
 });
